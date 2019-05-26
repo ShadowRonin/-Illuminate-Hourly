@@ -10,7 +10,7 @@
 import JobApplicationData from "../data";
 export default {
   data: function() {
-    return JobApplicationData.find(
+    return JobApplicationData.get().find(
       application => application.id === this.$route.params.id
     );
   },

@@ -1,4 +1,18 @@
-export default [
+export default {
+  _data: null,
+  get: function() {
+    if (!this._data) {
+      this._data =
+        JSON.parse(localStorage.getItem("JobApplications")) || startingData;
+    }
+    return this._data;
+  },
+  save: function() {
+    return localStorage.setItem("JobApplications", JSON.stringify(this._data));
+  }
+};
+
+const startingData = [
   {
     id: 1,
     name: "John Smith",
@@ -12,7 +26,6 @@ export default [
       Th: 2,
       F: 1,
       S: 0,
-
       Su: 0
     },
     questions: [
@@ -20,7 +33,8 @@ export default [
         text: "Have you ever been convicted of a felony?",
         answer: "No"
       }
-    ]
+    ],
+    bookmarked: false
   },
   {
     id: 2,
@@ -42,7 +56,8 @@ export default [
         text: "Have you ever been convicted of a felony?",
         answer: "Yes"
       }
-    ]
+    ],
+    bookmarked: false
   },
   {
     id: 3,
@@ -56,7 +71,6 @@ export default [
       W: 2,
       Th: 2,
       F: 2,
-
       S: 0,
       Su: 0
     },
@@ -65,7 +79,8 @@ export default [
         text: "Are you authorized to work in the United States?",
         answer: "Yes"
       }
-    ]
+    ],
+    bookmarked: false
   },
   {
     id: 4,
@@ -87,6 +102,7 @@ export default [
         text: "Are you authorized to work in the United States?",
         answer: "Yes"
       }
-    ]
+    ],
+    bookmarked: false
   }
 ];
