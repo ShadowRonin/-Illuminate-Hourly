@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <div v-for="application in applications" v-bind:key="application.id" class="bg-purple">
+      <ApplicationPreview class="preview" :applicationId="application.id"/>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import ApplicationPreview from "@/components/ApplicationPreview.vue";
+import JobApplicationData from "../data";
 
 export default {
   name: "home",
   components: {
-    HelloWorld
+    ApplicationPreview
+  },
+  data: function() {
+    return {
+      applications: JobApplicationData
+    };
   }
 };
 </script>
