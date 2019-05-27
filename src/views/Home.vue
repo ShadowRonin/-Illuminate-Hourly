@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex justify-center">
-    <div class="w-3/4">
+    <div class="content">
       <div class="sort align-top inline-block mt-3 mr-3 p-2 rounded bg-primary text-primary-text">
         Sort By:
         <select
@@ -176,7 +176,7 @@ export default {
       filter: this.getStartingFilter(),
       sortKey: "experience",
       sortAscending: true,
-      showFilter: true
+      showFilter: false
     };
   },
   mounted: function() {
@@ -321,6 +321,25 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  width: 75%;
+}
+@media only screen and (max-device-width: 480px) {
+  .content {
+    width: 100%;
+  }
+}
+@media only screen and (min-device-width: 480px) and (max-device-width: 1024px) {
+  .content {
+    width: 100%;
+  }
+}
+@media only screen and (min-device-width: 1024px) {
+  .content {
+    width: 75%;
+    max-width: 700px;
+  }
+}
 .sort-select {
   /* Remove select's arrow */
   appearance: none;

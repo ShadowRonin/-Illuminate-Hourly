@@ -1,8 +1,32 @@
 :root {
-  --color-primary: #5c6ac4;
-  --color-primary-text: white;
-  --color-secondary: #ecc94b;
-  --color-secondary-text: black;
+  background: var(--background);
+
+  --color-primary: #0b0c10;
+  --color-primary-text: #66fcf1;
+  --color-secondary: #45a29e;
+  --color-secondary-text: #0b0c10;
+  --background: #1f2833;
+}
+input {
+  background: var(--color-secondary);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #0b0c10;
+    --color-primary-text: #66fcf1;
+    --color-secondary: #45a29e;
+    --color-secondary-text: #0b0c10;
+    --background: #1f2833;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-primary: #55bcc9;
+    --color-primary-text: #d44949;
+    --color-secondary: #691919;
+    --color-secondary-text: #4bdfec;
+    --background: #f7f9fb;
+  }
 }
 
 .inline-datepicker {

@@ -32,7 +32,7 @@
   position: relative;
 }
 .logo i {
-  color: white;
+  color: var(--color-secondary-text);
   position: absolute;
   left: 50%;
   top: 65%;
@@ -49,7 +49,7 @@
   border-left-color: transparent;
   border-right-color: transparent;
   border-top-color: transparent;
-  border-bottom-color: black;
+  border-bottom-color: var(--color-secondary);
 
   position: absolute;
   left: 50%;
