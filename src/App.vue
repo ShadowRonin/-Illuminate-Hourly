@@ -35,14 +35,17 @@
   color: white;
   position: absolute;
   left: 50%;
-  top: 60%;
+  top: 65%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
 .upward-triangle {
   width: 0;
   height: 0;
-  border: 30px solid;
+  border-left: 26px solid;
+  border-right: 26px solid;
+  border-top: 30px solid;
+  border-bottom: 30px solid;
   border-left-color: transparent;
   border-right-color: transparent;
   border-top-color: transparent;
