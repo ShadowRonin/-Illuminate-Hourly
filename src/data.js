@@ -1,5 +1,6 @@
 export default {
   _data: null,
+  _callbacks: new Array(),
   get: function() {
     if (!this._data) {
       this._data =
@@ -7,8 +8,16 @@ export default {
     }
     return this._data;
   },
-  save: function() {
-    return localStorage.setItem("JobApplications", JSON.stringify(this._data));
+  bookmark: function(id, isBookmarked) {
+    this._data.find(el => el.id === id).bookmarked = isBookmarked;
+
+    localStorage.setItem("JobApplications", JSON.stringify(this._data));
+    for (const i in this._callbacks) {
+      this._callbacks[i]();
+    }
+  },
+  onChange: function(callback) {
+    this._callbacks.push(callback);
   }
 };
 

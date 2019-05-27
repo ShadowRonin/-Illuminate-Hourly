@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary text-primary-text m-2 p-1 rounded">
+  <div class="bg-primary text-primary-text my-2 p-1 rounded">
     <div class="flex justify-between">
       <div class="flex-grow">
         <h2 title="name">{{name}}</h2>
@@ -70,15 +70,15 @@ export default {
     applicationId: Number
   },
   data: function() {
-    return {
-      ...JobApplicationData.get().find(
-        application => application.id === this.$props.applicationId
-      ),
-      toggleBookmark: function() {
-        this.$data.bookmarked = !this.$data.bookmarked;
-        JobApplicationData.save();
-      }
-    };
+    return JobApplicationData.get().find(
+      application => application.id === this.$props.applicationId
+    );
+  },
+  methods: {
+    toggleBookmark: function() {
+      this.bookmarked = !this.bookmarked;
+      JobApplicationData.bookmark(this.id, this.bookmarked);
+    }
   }
 };
 </script>
