@@ -27,9 +27,19 @@
       <DayOfWeek :selected="availability.F > 0" label="F" title="Availability Friday"/>
       <DayOfWeek :selected="availability.S > 0" label="S" title="Availability Saturday"/>
     </div>
-    <div class="w-full flex justify-center -mt-4">
-      <button title="Show Details" v-on:click="expand()">
-        <i class="fas fa-angle-double-down text-l"></i>
+    <div class="questions" v-if="showDetails">
+      Questions:
+      <div class="mb-1 ml-1" v-for="question in questions" :key="question.text">
+        <div class="italic">{{question.text}}</div>
+        <div>{{question.answer}}</div>
+      </div>
+    </div>
+    <div class="toggle-details w-full flex justify-center -mt-4">
+      <button title="Show Details" v-on:click="showDetails = !showDetails">
+        <i
+          class="fas text-l"
+          :class="{'fa-angle-double-down': !showDetails, 'fa-angle-double-up': showDetails}"
+        ></i>
       </button>
     </div>
   </div>
@@ -45,9 +55,12 @@ export default {
     applicationId: Number
   },
   data: function() {
-    return JobApplicationData.get().find(
-      application => application.id === this.$props.applicationId
-    );
+    return {
+      ...JobApplicationData.get().find(
+        application => application.id === this.$props.applicationId
+      ),
+      showDetails: false
+    };
   },
   methods: {
     toggleBookmark: function() {
@@ -59,6 +72,12 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (max-device-width: 410px) {
+  .toggle-details {
+    margin-top: 0;
+  }
+}
+
 .bookmark {
   @apply self-start mx-1;
 }

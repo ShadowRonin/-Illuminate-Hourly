@@ -331,7 +331,7 @@ export default {
 }
 @media only screen and (min-device-width: 480px) and (max-device-width: 1024px) {
   .content {
-    width: 100%;
+    width: 75%;
   }
 }
 @media only screen and (min-device-width: 1024px) {
