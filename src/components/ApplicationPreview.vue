@@ -19,41 +19,13 @@
       </button>
     </div>
     <div class="flex">
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.Su}"
-        title="Availability Sunday"
-      >S</div>
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.M}"
-        title="Availability Monday"
-      >M</div>
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.T}"
-        title="Availability Tuesday"
-      >T</div>
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.W}"
-        title="Availability Wednesday"
-      >W</div>
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.Th}"
-        title="Availability Thursday"
-      >T</div>
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.F}"
-        title="Availability Friday"
-      >F</div>
-      <div
-        class="dayOfWeek"
-        :class="{'dayOfWeekFilled': availability.S}"
-        title="Availability Saturday"
-      >S</div>
+      <DayOfWeek :selected="availability.Su > 0" label="S" title="Availability Sunday"/>
+      <DayOfWeek :selected="availability.M > 0" label="M" title="Availability Monday"/>
+      <DayOfWeek :selected="availability.T > 0" label="T" title="Availability Tuesday"/>
+      <DayOfWeek :selected="availability.W > 0" label="W" title="Availability Wednesday"/>
+      <DayOfWeek :selected="availability.Th > 0" label="T" title="Availability Thursday"/>
+      <DayOfWeek :selected="availability.F > 0" label="F" title="Availability Friday"/>
+      <DayOfWeek :selected="availability.S > 0" label="S" title="Availability Saturday"/>
     </div>
     <div class="w-full flex justify-center -mt-4">
       <button title="Show Details" v-on:click="expand()">
@@ -65,7 +37,10 @@
 
 <script>
 import JobApplicationData from "../data";
+import DayOfWeek from "@/components/DayOfWeek.vue";
+
 export default {
+  components: { DayOfWeek },
   props: {
     applicationId: Number
   },
@@ -84,12 +59,6 @@ export default {
 </script>
 
 <style scoped>
-.dayOfWeek {
-  @apply mx-px text-center leading-tight rounded-full border-2 border-primary-text h-6 w-6;
-}
-.dayOfWeekFilled {
-  @apply bg-secondary text-secondary-text;
-}
 .bookmark {
   @apply self-start mx-1;
 }

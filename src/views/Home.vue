@@ -1,6 +1,119 @@
 <template>
   <div class="w-full flex justify-center">
     <div class="w-3/4">
+      <div class="filter mt-3 p-2 rounded bg-primary text-primary-text">
+        <button @click="showFilter = !showFilter">
+          <i class="fas fa-filter" title="Filter"></i>
+        </button>
+        <div v-if="showFilter" class="inline-block mx-1">
+          <button @click="clearFilter()">
+            <i class="fas fa-times"></i>
+            Clear Filter
+          </button>
+          <div class="search">
+            Search:
+            <input
+              class="rounded text-secondary-text text-center"
+              type="text"
+              v-model="filter.search"
+              @input="filterApplications()"
+            >
+          </div>
+          <div class="experience my-2">
+            Experience range:
+            <input
+              class="w-5 rounded text-secondary-text text-center"
+              type="number"
+              v-model="filter.experience.minimum"
+              name="minimumExperience"
+              @input="filterApplications()"
+            >
+            -
+            <input
+              class="w-5 rounded text-secondary-text text-center"
+              type="number"
+              v-model="filter.experience.maximum"
+              name="maximumExperience"
+              @input="filterApplications()"
+            >
+          </div>
+          <div class="applied my-2">
+            Applied:
+            <Datepicker
+              class="datepicker text-secondary-text"
+              wrapper-class="inline-datepicker"
+              input-class="rounded"
+              v-model="filter.applied.start"
+              placeholder="Start Date"
+              @closed="filterApplications()"
+            />
+            <Datepicker
+              class="datepicker text-secondary-text"
+              wrapper-class="inline-datepicker"
+              input-class="rounded"
+              v-model="filter.applied.end"
+              placeholder="End Date"
+              @closed="filterApplications()"
+            />
+          </div>
+          <div class="availability">
+            Availability:
+            <DayOfWeekCheckbox
+              v-model="filter.availability.Su"
+              day="S"
+              title="Availability Sunday"
+              @change="filterApplications()"
+            />
+            <DayOfWeekCheckbox v-model="filter.availability.M" day="M" title="Availability Monday"/>
+            <DayOfWeekCheckbox
+              v-model="filter.availability.T"
+              day="T"
+              title="Availability Tuesday"
+              @change="filterApplications()"
+            />
+            <DayOfWeekCheckbox
+              v-model="filter.availability.W"
+              day="W"
+              title="Availability Wednesday"
+              @change="filterApplications()"
+            />
+            <DayOfWeekCheckbox
+              v-model="filter.availability.Th"
+              day="T"
+              title="Availability Thursday"
+              @change="filterApplications()"
+            />
+            <DayOfWeekCheckbox
+              v-model="filter.availability.F"
+              day="F"
+              title="Availability Friday"
+              @change="filterApplications()"
+            />
+            <DayOfWeekCheckbox
+              v-model="filter.availability.S"
+              day="S"
+              title="Availability Saturday"
+              @change="filterApplications()"
+            />
+          </div>
+          <div class="bookmarked">
+            Bookmark:
+            <Checkbox
+              class="text-sm mr-2"
+              v-model="filter.bookmark.showBookmarked"
+              label="Bookmarked"
+              @change="filterApplications()"
+            />
+            <Checkbox
+              class="text-sm"
+              v-model="filter.bookmark.showUnBookmarked"
+              label="Not Bookmarked"
+              @change="filterApplications()"
+            />
+          </div>
+        </div>
+      </div>
+
       <div class="sort inline-block mt-3 p-2 rounded bg-primary text-primary-text">
         Sort By:
         <select
@@ -16,12 +129,13 @@
           <option value="availability">Total Availability</option>
           <option value="bookmarked">Bookmarked</option>
         </select>
-        <i
-          class="cursor-pointer"
-          title="Toggle Sort Direction"
-          :class="{'fas fa-sort-amount-up': sortAscending, 'fas fa-sort-amount-down': !sortAscending}"
-          @click="toggleSortDirection()"
-        ></i>
+        <button @click="toggleSortDirection()">
+          <i
+            class="cursor-pointer"
+            title="Toggle Sort Direction"
+            :class="{'fas fa-sort-amount-up': sortAscending, 'fas fa-sort-amount-down': !sortAscending}"
+          ></i>
+        </button>
       </div>
 
       <ApplicationPreview
@@ -34,32 +148,118 @@
 </template>
 
 <script>
+import Datepicker from "vuejs-datepicker";
 import ApplicationPreview from "@/components/ApplicationPreview.vue";
+import Checkbox from "@/components/Checkbox.vue";
 import JobApplicationData from "../data";
+import DayOfWeekCheckbox from "@/components/DayOfWeekCheckbox.vue";
 
 export default {
   name: "home",
   components: {
-    ApplicationPreview
+    ApplicationPreview,
+    Checkbox,
+    DayOfWeekCheckbox,
+    Datepicker
   },
   data: function() {
     return {
       applications: JobApplicationData.get(),
-      filterString: "",
+      filter: this.getStartingFilter(),
       sortKey: "experience",
-      sortAscending: true
+      sortAscending: true,
+      showFilter: true
     };
   },
   mounted: function() {
     JobApplicationData.onChange(() => {
-      this.applications = JobApplicationData.get();
       this.filterApplications();
     });
     this.sortApplications();
   },
   methods: {
+    getStartingFilter() {
+      return {
+        search: "",
+        experience: {
+          minimum: null,
+          maximum: null
+        },
+        applied: {
+          start: null,
+          end: null
+        },
+        bookmark: {
+          showBookmarked: true,
+          showUnBookmarked: true
+        },
+        availability: {
+          M: false,
+          T: false,
+          W: false,
+          Th: false,
+          F: false,
+          S: false,
+          Su: false
+        }
+      };
+    },
+    clearFilter() {
+      this.filter = this.getStartingFilter();
+      this.filterApplications();
+    },
     filterApplications() {
-      // preform filtering
+      this.applications = JobApplicationData.get().filter(application => {
+        const search = this.filter.search.toLowerCase();
+        if (
+          !application.name.toLowerCase().includes(search) &&
+          !application.position.toLowerCase().includes(search)
+        ) {
+          return false;
+        }
+
+        if (
+          this.filter.experience.minimum > 0 &&
+          application.experience < this.filter.experience.minimum
+        ) {
+          return false;
+        }
+        if (
+          this.filter.experience.maximum > 0 &&
+          application.experience > this.filter.experience.minimum
+        ) {
+          return false;
+        }
+
+        const applied = new Date(application.applied);
+        if (this.filter.applied.start && this.filter.applied.start > applied) {
+          return false;
+        }
+        if (this.filter.applied.end && this.filter.applied.end < applied) {
+          return false;
+        }
+
+        for (const day in application.availability) {
+          if (
+            this.filter.availability[day] &&
+            application.availability[day] <= 0
+          ) {
+            return false;
+          }
+        }
+
+        if (
+          !(
+            (this.filter.bookmark.showBookmarked && application.bookmarked) ||
+            (this.filter.bookmark.showUnBookmarked && !application.bookmarked)
+          )
+        ) {
+          return false;
+        }
+
+        return true;
+      });
+
       this.sortApplications();
     },
     sortApplications() {
@@ -116,5 +316,15 @@ export default {
 .sort-select {
   /* Remove select's arrow */
   appearance: none;
+}
+
+/* Remove arrows from input */
+.experience input[type="number"]::-webkit-outer-spin-button,
+.experience input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.experience input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style>

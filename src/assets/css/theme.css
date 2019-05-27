@@ -4,3 +4,10 @@
   --color-secondary: #ecc94b;
   --color-secondary-text: black;
 }
+
+.inline-datepicker {
+  display: inline;
+}
+.inline-datepicker div {
+  display: inline;
+}
