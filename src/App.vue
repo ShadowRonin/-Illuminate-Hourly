@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <header class="header flex items-center pl-3 pb-2">
+    <header class="header flex flex-wrap items-center pl-3 pb-2">
       <div class="logo text-2xl">
         <i class="fas fa-eye"></i>
         <div class="upward-triangle"></div>
       </div>
       <h1 class="flex-grow title text-2xl font-bold">
-        <router-link to="/">Illuminate Hourly</router-link>
+        <router-link to="/">Illuminati Wanted</router-link>
       </h1>
       <div>
         <i class="fas fa-tint self-start mr-1"></i>

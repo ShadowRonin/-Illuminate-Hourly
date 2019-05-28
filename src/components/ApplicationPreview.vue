@@ -18,7 +18,7 @@
         <i :class="{'fas fa-bookmark': bookmarked, 'far fa-bookmark': !bookmarked}"></i>
       </button>
     </div>
-    <div class="flex">
+    <div class="flex flex-wrap align-end">
       <div :class="{'mr-2': showDetails}">
         <DayOfWeek :selected="availability.Su > 0" label="S" title="Availability Sunday"/>
         <span v-if="showDetails">: {{availability.Su}}</span>
