@@ -33,11 +33,11 @@ select {
 }
 
 .theme-light {
-  --color-primary: #55bcc9;
-  --color-primary-text: #d44949;
-  --color-secondary: #691919;
-  --color-secondary-text: #4bdfec;
-  --background: #f7f9fb;
+  --color-primary: #e6e6e7;
+  --color-primary-text: #47b0a8;
+  --color-secondary: #30716e;
+  --color-secondary-text: #cececf;
+  --background: #d2d4d6;
 }
 
 .inline-datepicker {
