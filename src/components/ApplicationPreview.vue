@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="toggle-details w-full flex justify-center -mt-4">
-      <button title="Show Details" v-on:click="showDetails = !showDetails">
+      <button title="Show Details" class="px-3" v-on:click="showDetails = !showDetails">
         <i
           class="fas text-l"
           :class="{'fa-angle-double-down': !showDetails, 'fa-angle-double-up': showDetails}"
