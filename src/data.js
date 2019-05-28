@@ -113,5 +113,51 @@ const startingData = [
       }
     ],
     bookmarked: false
+  },
+  {
+    id: 5,
+    name: "Adam Weishaupt",
+    position: "Propaganda Writer",
+    applied: "03/15/76",
+    experience: 4,
+    availability: {
+      M: 0,
+      T: 0,
+      W: 0,
+      Th: 2,
+      F: 0,
+      S: 3,
+      Su: 0
+    },
+    questions: [
+      {
+        text: "Are you a member of The New World Order?",
+        answer: "Yes"
+      }
+    ],
+    bookmarked: false
+  },
+  {
+    id: 6,
+    name: "Adolph Knigge",
+    position: "Noviciate",
+    applied: "12/15/80",
+    experience: 2,
+    availability: {
+      M: 2,
+      T: 2,
+      W: 0,
+      Th: 0,
+      F: 1,
+      S: 0,
+      Su: 0
+    },
+    questions: [
+      {
+        text: "Are you a member of The New World Order?",
+        answer: "Yes"
+      }
+    ],
+    bookmarked: false
   }
 ];

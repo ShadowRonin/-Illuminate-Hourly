@@ -1,4 +1,4 @@
-# Illuminate Hourly
+# Illuminati Wanted
 
 ## Overview
 
