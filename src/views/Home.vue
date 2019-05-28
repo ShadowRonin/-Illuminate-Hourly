@@ -340,17 +340,4 @@ export default {
     max-width: 700px;
   }
 }
-.sort-select {
-  /* Remove select's arrow */
-  appearance: none;
-}
-/* Remove arrows from input */
-.experience input[type="number"]::-webkit-outer-spin-button,
-.experience input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.experience input[type="number"] {
-  -moz-appearance: textfield;
-}
 </style>
