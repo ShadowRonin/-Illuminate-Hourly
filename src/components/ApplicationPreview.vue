@@ -19,13 +19,34 @@
       </button>
     </div>
     <div class="flex">
-      <DayOfWeek :selected="availability.Su > 0" label="S" title="Availability Sunday"/>
-      <DayOfWeek :selected="availability.M > 0" label="M" title="Availability Monday"/>
-      <DayOfWeek :selected="availability.T > 0" label="T" title="Availability Tuesday"/>
-      <DayOfWeek :selected="availability.W > 0" label="W" title="Availability Wednesday"/>
-      <DayOfWeek :selected="availability.Th > 0" label="T" title="Availability Thursday"/>
-      <DayOfWeek :selected="availability.F > 0" label="F" title="Availability Friday"/>
-      <DayOfWeek :selected="availability.S > 0" label="S" title="Availability Saturday"/>
+      <div :class="{'mr-2': showDetails}">
+        <DayOfWeek :selected="availability.Su > 0" label="S" title="Availability Sunday"/>
+        <span v-if="showDetails">: {{availability.Su}}</span>
+      </div>
+      <div :class="{'mr-2': showDetails}">
+        <DayOfWeek :selected="availability.M > 0" label="M" title="Availability Monday"/>
+        <span v-if="showDetails">: {{availability.M}}</span>
+      </div>
+      <div :class="{'mr-2': showDetails}">
+        <DayOfWeek :selected="availability.T > 0" label="T" title="Availability Tuesday"/>
+        <span v-if="showDetails">: {{availability.T}}</span>
+      </div>
+      <div :class="{'mr-2': showDetails}">
+        <DayOfWeek :selected="availability.W > 0" label="W" title="Availability Wednesday"/>
+        <span v-if="showDetails">: {{availability.W}}</span>
+      </div>
+      <div :class="{'mr-2': showDetails}">
+        <DayOfWeek :selected="availability.Th > 0" label="T" title="Availability Thursday"/>
+        <span v-if="showDetails">: {{availability.Th}}</span>
+      </div>
+      <div :class="{'mr-2': showDetails}">
+        <DayOfWeek :selected="availability.F > 0" label="F" title="Availability Friday"/>
+        <span v-if="showDetails">: {{availability.F}}</span>
+      </div>
+      <div>
+        <DayOfWeek :selected="availability.S > 0" label="S" title="Availability Saturday"/>
+        <span v-if="showDetails">: {{availability.S}}</span>
+      </div>
     </div>
     <div class="questions" v-if="showDetails">
       Questions:
