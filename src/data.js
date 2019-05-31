@@ -117,7 +117,7 @@ const startingData = [
   {
     id: 5,
     name: "Adam Weishaupt",
-    position: "Propaganda Writer",
+    position: "Writer",
     applied: "03/15/76",
     experience: 4,
     availability: {
