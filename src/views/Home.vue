@@ -227,14 +227,14 @@ export default {
         }
 
         if (
-          this.filter.experience.minimum > 0 &&
+          this.filter.experience.minimum !== null &&
           application.experience < this.filter.experience.minimum
         ) {
           return false;
         }
         if (
-          this.filter.experience.maximum > 0 &&
-          application.experience > this.filter.experience.minimum
+          this.filter.experience.maximum !== null &&
+          application.experience > this.filter.experience.maximum
         ) {
           return false;
         }
